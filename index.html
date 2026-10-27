@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赵鸿斌 · 个人网站</title>
+<style>
+:root{
+  --bg:#0b1120;
+  --bg2:#111a30;
+  --card:#0f1830;
+  --line:rgba(148,163,184,.14);
+  --accent:#14b8a6;
+  --accent2:#22d3ee;
+  --text:#e2e8f0;
+  --muted:#94a3b8;
+  --glow:rgba(20,184,166,.35);
+  --radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+/* 背景光斑 */
+body::before,body::after{
+  content:"";position:fixed;border-radius:50%;filter:blur(120px);z-index:-1;
+}
+body::before{width:520px;height:520px;background:rgba(20,184,166,.16);top:-160px;right:-120px}
+body::after{width:420px;height:420px;background:rgba(34,211,238,.12);bottom:-140px;left:-100px}
+
+.container{max-width:1060px;margin:0 auto;padding:0 24px}
+
+/* 导航 */
+nav{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(12px);
+  background:rgba(11,17,32,.72);
+  border-bottom:1px solid var(--line);
+}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-weight:700;letter-spacing:.5px;color:var(--accent)}
+.logo span{color:var(--text)}
+.nav-links{display:flex;gap:26px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:15px;transition:.25s}
+.nav-links a:hover{color:var(--accent)}
+
+/* Hero */
+.hero{
+  min-height:78vh;display:flex;align-items:center;
+  position:relative;
+}
+.hero .container{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;padding-top:40px;padding-bottom:40px}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 14px;border:1px solid var(--line);border-radius:999px;
+  font-size:13px;color:var(--accent);background:rgba(20,184,166,.08);
+}
+.badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--glow)}
+h1{font-size:52px;font-weight:800;margin:20px 0 6px;letter-spacing:1px}
+h1 .dot{color:var(--accent)}
+.typing{font-size:20px;color:var(--accent2);min-height:30px;font-weight:600}
+.sub{margin-top:16px;color:var(--muted);max-width:520px}
+.hero-btns{display:flex;gap:14px;margin-top:28px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 24px;border-radius:10px;text-decoration:none;font-size:15px;font-weight:600;
+  transition:.25s;
+}
+.btn-primary{background:var(--accent);color:#06281f}
+.btn-primary:hover{box-shadow:0 0 24px var(--glow);transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* 头像卡片 */
+.avatar-card{
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+}
+.avatar{
+  width:230px;height:230px;border-radius:28px;
+  background:linear-gradient(135deg,rgba(20,184,166,.25),rgba(34,211,238,.12));
+  border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 0 40px rgba(20,184,166,.12);
+  position:relative;overflow:hidden;
+}
+.avatar svg{width:120px;height:120px;fill:rgba(226,232,240,.75)}
+.avatar::after{
+  content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent 0 70%,rgba(20,184,166,.4) 82%,transparent 94%);
+  animation:spin 6s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.meta-card{
+  width:100%;padding:16px 20px;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--card);display:grid;gap:6px;font-size:14px;
+}
+.meta-card div{display:flex;justify-content:space-between;color:var(--muted)}
+.meta-card b{color:var(--text);font-weight:600}
+
+/* 通用区块 */
+section{padding:72px 0}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:36px}
+.sec-head h2{font-size:30px;font-weight:800}
+.sec-head .en{color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase}
+.line{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+/* 关于 */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.about-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px;transition:.25s;
+}
+.about-card:hover{border-color:rgba(20,184,166,.45);transform:translateY(-3px)}
+.about-card h3{font-size:17px;margin-bottom:8px;color:var(--accent2)}
+.about-card p{color:var(--muted);font-size:14.5px}
+.about-card ul{list-style:none;margin-top:8px}
+.about-card li{color:var(--muted);font-size:14.5px;padding:3px 0;padding-left:18px;position:relative}
+.about-card li::before{content:"▹";position:absolute;left:0;color:var(--accent)}
+
+/* 技能 */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.skill-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;
+  transition:.25s;
+}
+.skill-card:hover{border-color:rgba(20,184,166,.45);transform:translateY(-3px)}
+.skill-card .ic{font-size:22px;margin-bottom:8px}
+.skill-card h4{font-size:16px;margin-bottom:6px}
+.bar{height:7px;border-radius:99px;background:rgba(148,163,184,.15);margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 10px var(--glow)}
+
+/* 项目 */
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.project-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;display:flex;flex-direction:column;gap:10px;transition:.25s;position:relative;
+}
+.project-card:hover{border-color:rgba(20,184,166,.5);transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.project-card .tag{
+  position:absolute;top:16px;right:16px;font-size:11.5px;color:var(--accent);
+  border:1px solid rgba(20,184,166,.4);padding:2px 10px;border-radius:99px;
+}
+.project-card h3{font-size:17px}
+.project-card p{color:var(--muted);font-size:14px;flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-size:12px;color:var(--accent2);background:rgba(34,211,238,.08);padding:3px 10px;border-radius:6px}
+.project-card a{color:var(--accent);font-size:14px;text-decoration:none;font-weight:600}
+.project-card a:hover{text-decoration:underline}
+
+/* 联系 */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.contact-item{
+  display:flex;align-items:center;gap:16px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;transition:.25s;
+}
+.contact-item:hover{border-color:rgba(20,184,166,.5);transform:translateY(-2px)}
+.contact-item .c-ic{
+  width:44px;height:44px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+  background:rgba(20,184,166,.12);color:var(--accent);
+}
+.contact-item b{display:block;font-size:15px}
+.contact-item span{color:var(--muted);font-size:13.5px;word-break:break-all}
+
+footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;color:var(--muted);font-size:13.5px}
+footer b{color:var(--accent)}
+
+/* 滚动淡入 */
+.reveal{opacity:0;transform:translateY(26px);transition:.7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* 移动端 */
+@media(max-width:820px){
+  h1{font-size:38px}
+  .hero .container{grid-template-columns:1fr;gap:36px}
+  .avatar{width:180px;height:180px}
+  .avatar svg{width:90px;height:90px}
+  .about-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  section{padding:56px 0}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">ZHB<span>·Dev</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">关于</a></li>
+      <li><a href="#skills">技能</a></li>
+      <li><a href="#projects">项目</a></li>
+      <li><a href="#contact">联系</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div>
+      <span class="badge">物联网工程 · 大二在读</span>
+      <h1>赵鸿斌<span class="dot">.</span></h1>
+      <div class="typing" id="typing"></div>
+      <p class="sub">物联网243班学生，学号 2023173227。热爱从硬件到前端的全栈探索——写过 C51 单片机程序，也用过 Vue3 和 Spring Boot 搭系统，现在正用 AI 工具加速开发。</p>
+      <div class="hero-btns">
+        <a class="btn btn-primary" href="#projects">查看项目</a>
+        <a class="btn btn-ghost" href="#contact">联系我</a>
+      </div>
+    </div>
+    <div class="avatar-card">
+      <div class="avatar">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+      </div>
+      <div class="meta-card">
+        <div><span>姓名</span><b>赵鸿斌</b></div>
+        <div><span>班级</span><b>物联网243班</b></div>
+        <div><span>学号</span><b>2023173227</b></div>
+        <div><span>GitHub</span><b>zhaohongbin0401</b></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="container">
+    <div class="sec-head reveal">
+      <h2>关于我</h2><span class="en">About</span><div class="line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-card reveal">
+        <h3>教育背景</h3>
+        <p>就读于物联网工程专业，系统学习嵌入式开发、传感器网络、数据库与 Web 开发，正在参与「魔搭社区 LLM 基础与实践」课程，接触大模型微调与 AI 工具开发。</p>
+      </div>
+      <div class="about-card reveal">
+        <h3>兴趣方向</h3>
+        <ul>
+          <li>嵌入式系统与 C51 单片机</li>
+          <li>Web 前端与全栈开发</li>
+          <li>AI 辅助开发与大模型应用</li>
+          <li>用 GitHub Pages 部署轻量应用</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="sec-head reveal">
+      <h2>技能</h2><span class="en">Skills</span><div class="line"></div>
+    </div>
+    <div class="skills">
+      <div class="skill-card reveal"><div class="ic">🌐</div><h4>前端开发</h4><p>HTML / CSS / JavaScript / Vue3</p><div class="bar"><i style="width:78%"></i></div></div>
+      <div class="skill-card reveal"><div class="ic">⚙️</div><h4>后端开发</h4><p>Spring Boot / MyBatis-Plus / Thymeleaf</p><div class="bar"><i style="width:70%"></i></div></div>
+      <div class="skill-card reveal"><div class="ic">🔌</div><h4>嵌入式</h4><p>C51 / Keil / 单片机编程</p><div class="bar"><i style="width:80%"></i></div></div>
+      <div class="skill-card reveal"><div class="ic">🤖</div><h4>AI 工具</h4><p>Trae / 大模型提示词 / 魔搭社区</p><div class="bar"><i style="width:85%"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="sec-head reveal">
+      <h2>项目</h2><span class="en">Projects</span><div class="line"></div>
+    </div>
+    <div class="projects">
+      <div class="project-card reveal">
+        <span class="tag">Web App</span>
+        <h3>图片水印助手</h3>
+        <p>纯前端批量水印工具：支持文字 / 图片水印、平铺 / 单点、透明度与旋转调节，本地处理不上传，一键批量导出。</p>
+        <div class="chips"><span>Canvas</span><span>HTML/CSS/JS</span><span>GitHub Pages</span></div>
+        <a href="https://zhaohongbin0401.github.io/watermark-tool/" target="_blank">访问应用 →</a>
+      </div>
+      <div class="project-card reveal">
+        <span class="tag">Web App</span>
+        <h3>AI 翻译助手</h3>
+        <p>中英日韩法德俄西八语互译，支持语言互换、一键复制、朗读与本地历史记录，界面简洁无广告。</p>
+        <div class="chips"><span>翻译 API</span><span>单文件</span><span>本地存储</span></div>
+        <a href="https://zhaohongbin0401.github.io/ai-translator/" target="_blank">访问应用 →</a>
+      </div>
+      <div class="project-card reveal">
+        <span class="tag">浏览器扩展</span>
+        <h3>电商图片下载插件</h3>
+        <p>Manifest V3 浏览器扩展：扫描当前页面全部图片（含懒加载与背景图），缩略图预览、多选批量下载。</p>
+        <div class="chips"><span>Manifest V3</span><span>Content Script</span><span>Edge</span></div>
+        <a href="https://zhaohongbin0401.github.io/image-downloader-ext/" target="_blank">查看部署 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="sec-head reveal">
+      <h2>联系我</h2><span class="en">Contact</span><div class="line"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-item reveal"><div class="c-ic">🐙</div><div><b>GitHub</b><span>zhaohongbin0401</span></div></div>
+      <div class="contact-item reveal"><div class="c-ic">📧</div><div><b>邮箱</b><span>13843284202@139.com</span></div></div>
+      <div class="contact-item reveal"><div class="c-ic">🎓</div><div><b>学号</b><span>2023173227</span></div></div>
+      <div class="contact-item reveal"><div class="c-ic">📍</div><div><b>班级</b><span>物联网243班</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">© 2026 <b>赵鸿斌</b> · 物联网243班 · Powered by <b>Trae</b> + GitHub Pages</div>
+</footer>
+
+<script>
+// 打字机标语
+const phrases = ["物联网 × Web × AI 学习者", "用 Trae 把想法变成产品", "C51 到 JavaScript，一直在折腾"];
+let pi = 0, ci = 0, del = false;
+const el = document.getElementById('typing');
+(function type(){
+  const cur = phrases[pi];
+  el.textContent = cur.slice(0, ci);
+  if(!del){
+    if(ci++ === cur.length){ del = true; return setTimeout(type, 1600); }
+    return setTimeout(type, 90);
+  }
+  if(ci-- === 0){ del = false; pi = (pi + 1) % phrases.length; }
+  setTimeout(type, 40);
+})();
+
+// 滚动淡入
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
